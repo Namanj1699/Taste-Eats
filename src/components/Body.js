@@ -3,6 +3,7 @@ import resobj from "../utils/mockData";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   //Local State Variable - super powerful variable
@@ -28,26 +29,31 @@ const Body = () => {
 
     // console.log(res)
     setListOfRestaurants(
-      res.data.cards[2].card.card.gridElements.infoWithStyle.restaurants
+      res.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
     );
     setFilteredRestaurants(
-      res.data.cards[2].card.card.gridElements.infoWithStyle.restaurants
+      res.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
     );
     console.log(
-      res?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      res?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
 
-  if (listofRestaurants.length === 0) {
-    return <Shimmer />;
-  }
+  let onlineStatus = useOnlineStatus();
 
-  return (
+  if(onlineStatus == false)
+  {
+    return<h1>OOPS !! No Internet</h1>
+  }
+  
+  return listofRestaurants.length === 0 ? (
+     <Shimmer />
+  ): (
     <div className="body">
-      <div className="filter">
-        <div className="search-container">
+      <div className="flex">
+        <div className="m-4 p-4">
           <input
-            className="searchbox"
+            className="border border-solid border-black"
             type="text"
             value={searchText}
             onChange={(e) => {
@@ -55,6 +61,7 @@ const Body = () => {
             }}
           />
           <button
+          className='px-4 py-2 m-4'
             onClick={() => {
               const Flist = listofRestaurants.filter((rest) => {
                 return rest.info.name
@@ -68,8 +75,9 @@ const Body = () => {
             Search
           </button>
         </div>
+        <div className="m-4 p-4 flex items-center">
         <button
-          className="filter-btn"
+          className="px-4 py-2"
           onClick={() => {
             const filteredList = listofRestaurants.filter(
               (res) => res.info.avgRating > 4
@@ -79,8 +87,10 @@ const Body = () => {
         >
           Top Rated Restaurants
         </button>
+        </div>
+        
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {filteredRestaurants.map((restro) => (
           <Link key={restro.info.id}  to={"/restaurants/"+restro.info.id}><ResCards resobj={restro} /></Link>
           

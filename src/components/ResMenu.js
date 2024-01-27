@@ -3,24 +3,12 @@ import { json } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import { RESMENU_API } from "../utils/constants";
+import useResMenu from "../utils/useResMenu";
 
 const ResMenu = () => {
   const { id } = useParams();
-  const [resInfo, setResInfo] = useState(null);
-  useEffect(() => {
-    console.log("useState called inside resmenu component");
-    fetchMenu();
-  }, []);
 
-  const fetchMenu = async () => {
-    const response = await fetch(
-      RESMENU_API+id
-    );
-
-    const json = await response.json();
-    setResInfo(json.data);
-  };
-
+  const resInfo = useResMenu(id);
   if (resInfo === null) return <Shimmer />;
 
   const { name, cuisines, costForTwoMessage } =
