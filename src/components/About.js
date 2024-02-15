@@ -1,10 +1,9 @@
-import UserCF from "./UserCF";
 import UserCC from "./UserCC";
 const About = () => {
     return (
         <div>
             <UserCC name={"Naman Jain (cbc)"}/>
-        </div>
+                    </div>
     );
 }
 

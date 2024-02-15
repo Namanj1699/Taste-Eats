@@ -1,36 +1,43 @@
-import React, { useEffect, useState } from "react";
-import { json } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
-import { RESMENU_API } from "../utils/constants";
-import useResMenu from "../utils/useResMenu";
-
+import useResMenu from "../utils/CustomizedHooks/useResMenu";
+import ResMenuCategory from "./ResMenuCategory";
+import { useState } from "react";
 const ResMenu = () => {
   const { id } = useParams();
 
   const resInfo = useResMenu(id);
+
+  const [showIndex, setShowIndex] = useState(0);
+
   if (resInfo === null) return <Shimmer />;
 
   const { name, cuisines, costForTwoMessage } =
     resInfo?.cards[0]?.card?.card?.info;
-  const { itemCards } =
-    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
-  console.log(itemCards);
+  
+  const categories =
+    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (c) =>
+        c?.card?.["card"]?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
+    
   return (
-    <div className="Menu">
-      <h1>{name}</h1>
-      <p>
+    <div className="text-center">
+      <h1 className="font-bold m-4 text-2xl">{name}</h1>
+      <p className="font-bold">
         {cuisines.join(", ")} - {costForTwoMessage}
       </p>
-      <h2>Menu</h2>
-      <ul>
-        {itemCards.map((item) => (
-          <li key={item.card.info.name}>
-            {item.card.info.name}-Rs.
-            {item.card.info.price / 100 || item.card.info.defaultprice / 100}
-          </li>
+      {/* categories accordian */}
+        {
+        categories.map((category,index) => (
+        <ResMenuCategory 
+        key={category?.card?.card.title}
+        data={category?.card?.card}
+        showItems={index === showIndex && true}
+        setShowIndex={()=> setShowIndex(index)}
+        />
         ))}
-      </ul>
     </div>
   );
 };
