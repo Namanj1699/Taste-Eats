@@ -9,8 +9,6 @@ import Cart from "./components/Cart";
 import { Provider } from "react-redux";
 import appStore from "../src/utils/Redux/appStore";
 import Search from "./components/Search";
-import "../_slick.scss";
-import "../_slickTheme.scss";
 
 // const Body =  lazy(()=> import ("./components/Body"));
 const AppLayout = () => {
