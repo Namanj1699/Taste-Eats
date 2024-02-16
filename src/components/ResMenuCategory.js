@@ -8,7 +8,6 @@ const ResMenuCategory=({data,showItems,setShowIndex})=> {
     // setShowItems(!showItems);
     setShowIndex();
   }
-  console.log(1)
   return (
     <div>
         <div className="w-8/12 bg-gray-50 mx-auto my-4 shadow-lg p-4">

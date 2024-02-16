@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/CustomizedHooks/useOnlineStatus";
 import Footer from "../components/Footer";
 import resCardsItems from "../utils/MockData/resCardsItems.json"
+import noInternet from "../images/noInternet.png"
 
 const Body = () => {
   const [listofRestaurants, setListOfRestaurants] = useState(resCardsItems);
@@ -30,7 +31,11 @@ const Body = () => {
   }
 
   return  onlineStatus === false ?
-  (<h1>OOPS !! No Internet</h1>)
+  (
+  <div>
+      <label className="font-bold flex justify-center text-2xl mt-16">No Internet</label>
+      <img src={noInternet} className="w-[10%] mx-auto my-10"/>
+  </div>)
    :( <div className="body">
       <div className="flex justify-between m-4">
         <h1 className="text-xl font-bold mx-2">Hey Foodie, What's on your mind?</h1>
