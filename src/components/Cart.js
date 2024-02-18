@@ -16,8 +16,7 @@ const Cart = () => {
 
   let iTemTotal=0;
   
-  items.filter((item,index)=>{
-    key={index};
+  items.filter((item)=>{
     item.card.info.price ? iTemTotal=(iTemTotal+item.card.info.price / 100) : iTemTotal=(iTemTotal+item.card.info.defaultPrice / 100)
   })
 
@@ -26,7 +25,7 @@ const Cart = () => {
 
   return items.length === 0 ? (
     <div>
-          <img src={emptyCart} className="w-2/4 m-auto" />
+          <img src={emptyCart} className="w-2/4 m-auto mt-4" />
           <h1 className="text-center font-semibold">Your cart is empty</h1>
           <h3 className="text-center text-gray-400">You can go to home page to view more restaurants</h3>
            <button></button>
