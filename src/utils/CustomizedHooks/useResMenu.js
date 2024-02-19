@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { RESMENU_API } from "../Constant/constants";
 
 const useResMenu = (resId) => {
   const [resInfo, setResInfo] = useState(null);
@@ -9,7 +8,8 @@ const useResMenu = (resId) => {
   }, []);
 
   const fetchMenu = async () => {
-    const response = await fetch("https://corsproxy.org/?"+RESMENU_API + resId);
+    const url = 'https://corsproxy.org/?' + encodeURIComponent("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.6939481&lng=77.2981474&restaurantId=") + resId;
+    const response = await fetch(url);
     const json = await response.json();
     setResInfo(json.data);
   };
