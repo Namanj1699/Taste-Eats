@@ -1,3 +1,3 @@
 # Tasty-Eats 😋😋
 
--[Demo] (tastyeats.netlify.app)
+[Demo] (tastyeats.netlify.app)
