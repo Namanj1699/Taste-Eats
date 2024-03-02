@@ -34,7 +34,7 @@ const ResMenuItems = ({ items }) => {
           </div>
           <div className="w-3/12 p-4">
             <img src={CDN_URL + item.card.info.imageId} className="w-full" />
-            <FontAwesomeIcon icon={faCartPlus} size="xl" className="mx-40 my-2 cursor-pointer" onClick={()=> addItem(item)}/>
+            <FontAwesomeIcon icon={faCartPlus} size="lg" className="mx-24 my-2 cursor-pointer" onClick={()=> addItem(item)}/>
           </div>
         </div>
       ))}
