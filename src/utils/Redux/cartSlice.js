@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
+import { act } from "react-dom/test-utils";
 
 const cartSlice = createSlice({
     name : "cart",
@@ -11,8 +12,16 @@ const cartSlice = createSlice({
             state.items.push(action.payload);
         },
 
-        removeItems : (state)=>{
-            state.items.pop()
+        removeItems : (state,action)=>{
+            console.log(current(state))
+            debugger;
+
+            const removeIndex = state.items.findIndex( item => item.card.info.id === action.payload);
+            // remove object
+            state.items.splice( removeIndex, 1 );
+
+            // state.items.filter((itr)=> 
+            // itr.card.info.id!=action)
         },
         
         clearCart : (state,action)=>{

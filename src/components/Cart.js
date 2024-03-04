@@ -56,7 +56,7 @@ const Cart = () => {
                 icon={faXmark}
                 size="xl"
                 className="cursor-pointer"
-                onClick={() => removeItem(item)}
+                onClick={() => removeItem(item.card.info.id)}
               />
             </div>
             <img src={CDN_URL + item.card.info.imageId} className="w-full" />

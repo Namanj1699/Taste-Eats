@@ -41,7 +41,7 @@ const Body = () => {
         <h1 className="text-xl font-bold mx-2">Hey Foodie, What's on your mind?</h1>
         <div className="mx-14">
           <input
-            type="checkbox" className="mx-2" onClick={filterRestaurant} defaultChecked={topRatedCheckMark}
+            type="checkbox" className="mx-2 cursor-pointer" onClick={filterRestaurant} defaultChecked={topRatedCheckMark}
           />
           <label className="mx-1 font-bold text-base">Top Rated Restaurants</label>
           </div>
