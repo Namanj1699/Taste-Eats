@@ -12,8 +12,6 @@ const ResMenu = () => {
 
   const resInfo = useResMenu(id);
 
-  const [showIndex, setShowIndex] = useState(0);
-
   const itms = useSelector((store)=>  store.cart.items);
 
   if (resInfo === null) return <Shimmer />;
@@ -36,12 +34,10 @@ const ResMenu = () => {
       </p>
       {/* categories accordian */}
         {
-        categories.map((category,index) => (
+        categories.map((category) => (
         <ResMenuCategory 
         key={category?.card?.card.title}
         data={category?.card?.card}
-        showItems={index === showIndex && true}
-        setShowIndex={()=> setShowIndex(index)}
         />
         ))}
       {itms.length>0 ? <div className="bg-green-600 text-white mx-60 my-2 py-2 flex justify-between sticky bottom-1">
